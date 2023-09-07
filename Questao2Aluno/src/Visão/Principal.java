@@ -1,19 +1,18 @@
 package Visão;
 import Aplicação.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Principal {
 
 	public static void main(String[] args) {
-		Aluno a1 = new Aluno();
-		Aluno a2 = new Aluno();
-		Aluno a3 = new Aluno();
-		String nome,nome2,nome3;
+		ArrayList<Aluno>registro= new ArrayList<Aluno>();
+		String nome;
 		int num;
-		int num2;
-		int num3;
+		int i;
 		int auxnum,auxnota;
-		float no11=0,no12=0,no13=0,no21=0,no22=0,no23=0,no31=0,no32=0,no33=0,nova;
+		float no11=0,no12=0,no13=0,nova;
 		boolean[] flag = new boolean[3];
+		boolean achou = false,achou2 = false;
 		Scanner teclado = new Scanner(System.in);
 		int op;
 		do {
@@ -28,50 +27,31 @@ public class Principal {
 			op = teclado.nextInt();
 			switch(op) {
 			case 1:
-				teclado.nextLine();
-				System.out.println("Digite o nome do aluno ");
-				  nome = teclado.nextLine();
-				  a1.SetNome(nome);
-				  System.out.println("Digite o nome do aluno ");
-				  nome2 = teclado.nextLine();
-				  a2.SetNome(nome2);
-				  System.out.println("Digite o nome do aluno ");
-				  nome3 = teclado.nextLine();
-				  a3.SetNome(nome3);
-				  System.out.println("Digite o numero de matricula do aluno  ");
-				  num = teclado.nextInt();
-				  a1.SetMatricula(num);
-				  System.out.println("Digite o numero de matricula do aluno  ");
-				  num2 = teclado.nextInt();
-				  a2.SetMatricula(num2);
-				  System.out.println("Digite o número de matricula do aluno ");
-				  num3 = teclado.nextInt();
-				  a3.SetMatricula(num3);
+				for(i=0;i<3;i++) {
+					teclado.nextLine();
+					Aluno a = new Aluno();
+					System.out.println("Digite o seu numero de matricula");
+					num = teclado.nextInt();
+					a.SetMatricula(num);
+					teclado.nextLine();
+					System.out.println("Digite o seu Nome ");
+					nome = teclado.nextLine();
+					a.SetNome(nome);
+					registro.add(a);
+				}
 				  flag[0] = true;
 				  break;
 			case 2:
 				if(flag[0]) {
-					System.out.println("Digite a nota1 do primeiro aluno");
-					no11 = teclado.nextFloat();
-				System.out.println("Digite a nota2 do primeiro aluno ");
-					no12 = teclado.nextFloat();
-				System.out.println("Digite a nota3 do primeiro aluno");
-				    no13 = teclado.nextFloat();
-				  a1.SetNotas(no11, no12, no13);
-				System.out.println("Digite a nota1  do Segundo aluno" );
-				  no21 = teclado.nextFloat();
-				System.out.println("Digite a nota2 do Segundo aluno ");
-				  no22 = teclado.nextFloat();
-				System.out.println("Digite a nota3 do Segundo aluno ");
-				  no23 = teclado.nextFloat();
-				a2.SetNotas(no21, no22, no23);
-				System.out.println("Digite a nota1 do Terceiro aluno ");
-					no31 = teclado.nextFloat();
-				System.out.println("Digite a nota2 do Terceiro aluno/n ");
-				  	no32 = teclado.nextFloat();
-				System.out.println("Digite a nota3 do Terceiro aluno/n ");
-				 	no33 = teclado.nextFloat();
-				a3.SetNotas(no31, no32, no33);
+					for(i=0;i<3;i++) {
+						System.out.println("Digite a sua nota 1");
+						no11 = teclado.nextFloat();
+						System.out.println("Digite a sua nota 2");
+						no12 = teclado.nextFloat();
+						System.out.println("Digite a sua nota 3");
+						no13 = teclado.nextFloat();
+						registro.get(i).SetNotas(no11, no12, no13);
+					}
 				flag[1]=true;
 				}else {
 					System.out.println("Preencha o a opção 1 primeiro ");
@@ -79,9 +59,9 @@ public class Principal {
 				break;
 			case 3:
 				if(flag[1]) {
-					a1.CalcularMedia();
-					a2.CalcularMedia();
-					a3.CalcularMedia();
+					for(i=0;i<3;i++) {
+						registro.get(i).CalcularMedia();
+					}
 					flag[2]=true;
 				}else {
 					System.out.println("Preencha o case 1 primeiro");
@@ -89,9 +69,9 @@ public class Principal {
 				break;
 			case 4:
 				if(flag[2]) {
-					System.out.println(a1.GetSituacao());
-					System.out.println(a2.GetSituacao());
-					System.out.println(a3.GetSituacao());
+					for(i=0;i<3;i++) {
+						System.out.println(registro.get(i).GetSituacao());
+					}
 				}else {
 					System.out.println("Preencha os cases 1 e 2");
 				}
@@ -100,98 +80,45 @@ public class Principal {
 				if(flag[2]) {
 					System.out.println("Digite o numero de matricula do aluno que esta pesquisando  ");
 					auxnum = teclado.nextInt();
-					if(a1.BuscarAluno(auxnum)) {
-						System.out.println(a1.GetNome()); 
-						System.out.println(a1.GetMatricula()); 
-						System.out.println(a1.GetMedia());
-						System.out.println(a1.GetNota1());
-						System.out.println(a1.GetNota2());
-						System.out.println(a1.GetNota3());
-						System.out.println(a1.GetSituacao());
-					}else {
-						if(a2.BuscarAluno(auxnum)) {
-							System.out.println(a2.GetNome()); 
-							System.out.println(a2.GetMatricula()); 
-							System.out.println(a2.GetMedia());
-							System.out.println(a2.GetNota1());
-							System.out.println(a2.GetNota2());
-							System.out.println(a2.GetNota3());
-							System.out.println(a2.GetSituacao());
-						}else {
-							if(a3.BuscarAluno(auxnum)) {
-								System.out.println(a3.GetNome()); 
-								System.out.println(a3.GetMatricula()); 
-								System.out.println(a3.GetMedia());
-								System.out.println(a3.GetNota1());
-								System.out.println(a3.GetNota2());
-								System.out.println(a3.GetNota3());
-								System.out.println(a3.GetSituacao());
-							}else {
-								System.out.println("Não foi achado o aluno");
-								}
-							}
+					for(i=0;i<registro.size();i++) {
+						if(registro.get(i).GetMatricula() == auxnum) {
+							System.out.println("Foi localizado");
+							System.out.println(registro.get(i).GetNome());
+							System.out.println(registro.get(i).GetMatricula());
+							System.out.println(registro.get(i).GetNota1());
+							System.out.println(registro.get(i).GetNota2());
+							System.out.println(registro.get(i).GetNota3());
+							System.out.println(registro.get(i).GetSituacao());
+							achou = true;
 						}
-				}else {
+					}
+				}
+				if(!achou) {
 					System.out.println("Preencha os cases 1 e 2 primeiro");
 				}
-				
 				break;
 			case 6:
 				if(flag[1]) {
 					System.out.println("Digite o numero de matricula do aluno que esta pesquisando  ");
 					auxnum = teclado.nextInt();
-					if(a1.BuscarAluno(auxnum)) {
-						System.out.println("Qual Nota deseja alterar ");
-						 auxnota = teclado.nextInt();
-						 System.out.println("Qual é a nova nota ");
-						 nova = teclado.nextFloat();
-						 a1.alterarNota(auxnota,nova);
-							 a1.CalcularMedia();
-							 if(a1.GetMedia()>=7) {
-									System.out.println("O aluno 1 esta Aprovado\n ");
-							}else {
-								if(a1.GetMedia()<3) {
-									System.out.println("O aluno 1 esta Reprovado\n ");
-								}else {
-									System.out.println("O aluno 1 esta em Recuperacao\n");
-									}
-							   }
-					}else {
-						if(a2.BuscarAluno(auxnum)) {
-							System.out.println("Qual Nota deseja alterar ");
-							 auxnota = teclado.nextInt();
-							 System.out.println("Qual é a nova nota ");
-							 nova = teclado.nextFloat();
-							 a2.alterarNota(auxnota,nova);
-								 a2.CalcularMedia();
-								if(a2.GetMedia()>=7) {
-									System.out.println("O aluno 2 esta Aprovado\n ");
-							}else {
-								if(a2.GetMedia()<3) {
-									System.out.println("O aluno 2 esta Reprovado\n ");
-								}else {
-									System.out.println("O aluno 2 esta em Recuperacao\n");
-								}
-							   }
-						}else {
-							if(a3.BuscarAluno(auxnum)) {
-								System.out.println("Digite a nota que deseja alterar /n");
+					for(i=0;i<registro.size();i++) {
+						if(registro.get(i).GetMatricula() == auxnum) {
+							System.out.println("Foi localizado");
+							System.out.println("Digite qual nota deseja alterar");
+							auxnota = teclado.nextInt();
+							achou2 = true;
+							while(auxnota<0 || auxnota>4) {
+								System.out.println("Digite qual nota deseja alterar");
 								auxnota = teclado.nextInt();
-								 System.out.println("Qual é a nova nota ");
-								 nova = teclado.nextFloat();
-								 a3.alterarNota(auxnota,nova);
-									if(a3.GetMedia()>=7) {
-										System.out.println("O aluno 3 esta Aprovado\n ");
-								}else {
-									if(a3.GetMedia()<3) {
-										System.out.println("O aluno 3 esta Reprovado\n ");
-									}else {
-										System.out.println("O aluno 3 esta em Recuperacao\n");
-										}
-								  	}
-							}else {
-								System.out.println("Nenhum aluno foi encontrado/n");
 							}
+							System.out.println("Digite a Nova nota");
+								nova = teclado.nextFloat();
+								registro.get(i).alterarNota(auxnota,nova);
+								registro.get(i).CalcularMedia();
+								System.out.println(registro.get(i).GetSituacao()); 
+						}
+						if(!achou2) {
+							System.out.println("O número Digitado está Invalido");
 						}
 					}
 				}else {
