@@ -62,7 +62,7 @@ public class Principal {
 						tam = teclado.nextFloat();
 						País pt = new País(nome,tam,capital);
 						for(int i=0;i<front.size();i++) {
-							if(front.get(i).equals(nome)) {
+							if(front.get(i).getNome().equals(nome)) {
 								repete=true;
 							}
 						}
@@ -93,10 +93,11 @@ public class Principal {
 				}
 				break;
 			case 5:
+				teclado.nextLine();
 				System.out.println("Digite o nome do país que quer saber a fronteira em comum ");
 				auxnome = teclado.nextLine();
 				for(int i=0; i<Mundo.size();i++) {
-					if(Mundo.get(i).equals(auxnome)) {
+					if(Mundo.get(i).getNome().equals(auxnome)) {
 						 achou = true;
 						 posi = i;
 					}
