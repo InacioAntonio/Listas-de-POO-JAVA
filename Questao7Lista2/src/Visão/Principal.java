@@ -8,8 +8,8 @@ public class Principal {
 		Scanner teclado = new Scanner(System.in);
 		int op,op2,op3,rep=0,posi=0;
 		float tam;
-		String nome,capital,auxcapital,auxnome,nomeF;
-		boolean flag=false,repete=false,achou=false;
+		String nome,capital,auxnome;
+		boolean repete=false,achou=false;
 		ArrayList<País>Mundo=new ArrayList<País>();
 		ArrayList<País> front=new ArrayList<País>();
 		ArrayList<País> vizinhos=new ArrayList<País>();
